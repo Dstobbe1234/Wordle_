@@ -7,24 +7,28 @@ let aBtn = document.getElementById("aBtn");
 let bBtn = document.getElementById("bBtn");
 let cBtn = document.getElementById("cBtn");
 let buttonClicked;
-
-let possibleWords = ["Apple", "Ready", "Death", "Audio", "Boils"];
+let submitOrder = [firstGuess, secondGuess, thirdGuess, fourthGuess, fifthGuess];
+let submitLoop  = [0, 1, 2, 3, 4];
+let letterCheck = 0;
+let splicedSubmitLoop = submitLoop.splice(letterCheck, 1)
+let possibleWords = ["APPLE", "READY", "DEATH", "AUDIO", "BOILS"];
 let randomInt = Math.random() * (4 - 0);
 let randomFlt = randomInt.toFixed();
 let randomWord = possibleWords[randomFlt];
 let numberOfGuesses = 0;
 
 
+
 document.getElementById("wordle").innerHTML = randomWord;
-aBtn.addEventListener("click", event => {
+aBtn.addEventListener("click", () => {
     buttonClicked = "A"
     guess()
 });
-bBtn.addEventListener("click", event => {
+bBtn.addEventListener("click", () => {
     buttonClicked = "B"
     guess()
 });
-cBtn.addEventListener("click", event => {
+cBtn.addEventListener("click", () => {
     buttonClicked = "C"
     guess()
 });
@@ -49,25 +53,21 @@ function guess() {
 }
 
 function submit() {
-    console.log(firstGuess.innerHTML);
-    if (numberOfGuesses === 5)
-        if (firstGuess.innerHTML === randomWord[0]) {
-            firstGuess.style.backgroundColor = "rgb(0, 255, 0)"
-        } else if (firstGuess.innerHTML === randomWord[1] || firstGuess.innerHTML === randomWord[2] || firstGuess.innerHTML === randomWord[3] || firstGuess.innerHTML === randomWord[4]) {
-            firstGuess.style.backgroundColor = "rgb(255, 255, 0)"
-        } else {
-            firstGuess.style.backgroundColor = "grey"
-        }
-
-        if (secondGuess.innerHTML === randomWord[1]) {
-            secondGuess.style.backgroundColor = "rgb(0, 255, 0)"
-        } else if (secondGuess.innerHTML === randomWord[0] || secondGuess.innerHTML === randomWord[2] || secondGuess.innerHTML === randomWord[3] || secondGuess.innerHTML === randomWord[4]) {
-            if (firstGuess.innerHTML !== secondGuess.innerHTML) {
-                secondGuess.style.backgroundColor = "rgb(255, 255, 0)"
+    if (numberOfGuesses === 5) {
+        for (letterCheck; letterCheck <= 4; letterCheck ++) { 
+            if (submitOrder[letterCheck].innerHTML === randomWord[letterCheck]) {  
+                submitOrder[letterCheck].style.backgroundColor = "rgb(0, 255, 0)" 
+            } else if (submitOrder[letterCheck].innerHTML === randomWord[submitLoop[0]] || submitOrder[letterCheck].innerHTML === randomWord[submitLoop[1]] || submitOrder[letterCheck].innerHTML === randomWord[submitLoop[2]] || submitOrder[letterCheck].innerHTML === randomWord[submitLoop[3]]) {
+                let wordIndex = randomWord.indexOf(submitOrder[letterCheck].innerHTML)
+                if (submitOrder[submitLoop[0]].innerHTML === randomWord[wordIndex] || submitOrder[submitLoop[1]].innerHTML === randomWord[wordIndex] || submitOrder[submitLoop[2]].innerHTML === randomWord[wordIndex] || submitOrder[submitLoop[3]].innerHTML === randomWord[wordIndex]) {
+                    alert("EEE")
+                    submitOrder[letterCheck].style.backgroundColor = "grey"
+                } else {
+                    submitOrder[letterCheck].style.backgroundColor = "rgb(255, 255, 0)"
+                }
             } else {
-                secondGuess.style.backgroundColor = "grey"
-            }
-        } else {
-            secondGuess.style.backgroundColor = "grey"
+                submitOrder[letterCheck].style.backgroundColor = "grey"
+            } 
         }
-}
+    }
+}   
