@@ -61,7 +61,7 @@ function submit() {
                 submitOrder[letterCheck].style.backgroundColor = "rgb(0, 255, 0)" 
             } else if (submitOrder[letterCheck].innerHTML === randomWord[submitLoop[0]] || submitOrder[letterCheck].innerHTML === randomWord[submitLoop[1]] || submitOrder[letterCheck].innerHTML === randomWord[submitLoop[2]] || submitOrder[letterCheck].innerHTML === randomWord[submitLoop[3]]) {
                 let wordIndex = randomWord.indexOf(submitOrder[letterCheck].innerHTML)
-                if (submitOrder[submitLoop[0]].innerHTML === randomWord[wordIndex] || submitOrder[submitLoop[1]].innerHTML === randomWord[wordIndex] || submitOrder[submitLoop[2]].innerHTML === randomWord[wordIndex] || submitOrder[submitLoop[3]].innerHTML === randomWord[wordIndex]) {
+                if (submitOrder[submitLoop[0]].innerHTML === randomWord[wordIndex] && submitLoop[0] < letterCheck || submitOrder[submitLoop[1]].innerHTML === randomWord[wordIndex] && submitLoop[1] < letterCheck || submitOrder[submitLoop[2]].innerHTML === randomWord[wordIndex] && submitLoop[2] < letterCheck || submitOrder[submitLoop[3]].innerHTML === randomWord[wordIndex] && submitLoop[3] < letterCheck) {
                     submitOrder[letterCheck].style.backgroundColor = "grey"
                 } else {
                     submitOrder[letterCheck].style.backgroundColor = "rgb(255, 255, 0)"
